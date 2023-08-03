@@ -1,0 +1,37 @@
+@use 'sass:meta';
+
+/// Функция `is-map()` позволяет узнать соответствует ли значение
+/// Sass-типу `map`
+/// ---
+/// @name is-map
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$null: null;
+///
+/// 	@debug sassify.is-map($number); //=> false
+/// 	@debug sassify.is-map($string); //=> false
+/// 	@debug sassify.is-map($color); //=> false
+/// 	@debug sassify.is-map($list); //=> false
+/// 	@debug sassify.is-map($map); //=> true
+/// 	@debug sassify.is-map($bool); //=> false
+/// @param {map} $value - значение, которое
+/// 	надо проверить на соответствие типу `map`
+/// @return {boolean} является ли значение, переданное в параметр
+/// 	`$value`, картой?
+@function is-map($value) {
+	@return meta.type-of($value) == map;
+}
