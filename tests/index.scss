@@ -11,18 +11,9 @@ $map: (
 $bool: true;
 $null: null;
 
-@debug sassify.is-bool($number); //=> false
-@debug sassify.is-bool($string); //=> false
-@debug sassify.is-bool($color); //=> false
-@debug sassify.is-bool($list); //=> false
-@debug sassify.is-bool($map); //=> false
-@debug sassify.is-bool($bool); //=> true
-
-@debug '----';
-
-@debug sassify.is-boolean($number); //=> false
-@debug sassify.is-boolean($string); //=> false
-@debug sassify.is-boolean($color); //=> false
-@debug sassify.is-boolean($list); //=> false
-@debug sassify.is-boolean($map); //=> false
-@debug sassify.is-boolean($bool); //=> true
+@debug sassify.is-color($number); //=> false
+@debug sassify.is-color($string); //=> false
+@debug sassify.is-color($color); //=> true
+@debug sassify.is-color($list); //=> false
+@debug sassify.is-color($map); //=> false
+@debug sassify.is-color($bool); //=> false
