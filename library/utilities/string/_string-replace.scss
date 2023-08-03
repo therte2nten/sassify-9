@@ -1,0 +1,59 @@
+@use '../type/is-string' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `string-replace()` позволяет выполнить замену
+/// части строчки на что-то иное
+/// ---
+/// @name string-replace
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author [Sindre Sorhus](https://github.com/sindresorhus)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$string: 'Lorem ipsum dolor sit amet.';
+///
+/// 	@debug sassify.string-replace($string, 'Lorem ipsum', 'Ipsum lorem'); //=> Ipsum lorem dolor sit amet.
+/// @param {string} $string - строка, в которой нужно
+/// 	заменить какую-то часть
+/// @param {string} $replaceable - часть строким из
+/// 	`$string`, которую надо заменить
+/// @param {string} $replacement [''] - строка, которая
+/// 	заменит часть `$replaceable` из `$string`
+/// @return {string} строка с замененной частью
+@function string-replace($string, $replaceable, $replacement: '') {
+
+	// ? С помощью функции `is-string` проверяем параметр
+	// ? `$string` на соответствие типу `string`:
+	@if is-string($string) {
+
+		$-index: str-index($string, $replaceable);
+
+		@if $-index {
+
+			@return str-slice($string, 1, $-index - 1)
+				+ $replacement
+				+ string-replace(
+						str-slice(
+							$string,
+							$-index + str-length($replaceable)
+						),
+						$replaceable,
+						$replacement
+					);
+
+		}
+
+		@return $string;
+
+	}
+
+	// ? Если в параметр `$string` передано значение не
+	// ? соответствующее типу `string` отображаем сообщение
+	// ? об этом:
+	@else {
+		@return invalid-type-log('string-replace', $string, 'string');
+	}
+
+}

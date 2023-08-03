@@ -2,6 +2,6 @@
 	$sassify__strict-mode: true
 );
 
-@debug sassify.number-strip-unit(16px); //=> 16
-@debug sassify.number-strip-unit(20em); //=> 20
-@debug sassify.number-strip-unit(1200px); //=> 1200
+$string: 'Lorem ipsum dolor sit amet.';
+
+@debug sassify.string-replace($string, 'Lorem ipsum', 'Ipsum lorem'); //=> Ipsum lorem dolor sit amet.
