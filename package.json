@@ -4,7 +4,7 @@
 	"description": "Большой набор миксинов и функций на языке CSS-препроцессора Sass для упрощения, улучшения и ускорения процесса написания стилей для веб-сайтов.",
 	"main": "index.scss",
 	"scripts": {
-		"test": "sass tests/index.scss:tests/output.css --no-source-map",
+		"test": "sass tests/index.scss:tests/output.css --no-source-map && npm run docs",
 		"commit": "git cz",
 		"commit:all": "git add --all && git cz",
 		"docs": "npx sassdoc . -d docs/",
@@ -31,27 +31,27 @@
 	"license": "MIT",
 	"homepage": "https://github.com/therteenten/sassify#readme",
 	"bugs": {
-    "url": "https://github.com/therteenten/sassify/issues"
-  },
+		"url": "https://github.com/therteenten/sassify/issues"
+	},
 	"config": {
-    "commitizen": {
-      "path": "node_modules/cz-customizable"
-    },
-    "cz-customizable": {
-      "config": ".commitizen.js"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS -g '.commitlint.js'"
-    }
-  },
+		"commitizen": {
+			"path": "node_modules/cz-customizable"
+		},
+		"cz-customizable": {
+			"config": ".commitizen.js"
+		}
+	},
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS -g '.commitlint.js'"
+		}
+	},
 	"devDependencies": {
-    "@commitlint/cli": "^17.6.7",
-    "cz-customizable": "^7.0.0",
-    "husky": "^8.0.3"
-  },
-  "dependencies": {
-    "sass": "^1.64.0"
-  }
+		"@commitlint/cli": "^17.6.7",
+		"cz-customizable": "^7.0.0",
+		"husky": "^8.0.3"
+	},
+	"dependencies": {
+		"sass": "^1.64.2"
+	}
 }
