@@ -1,7 +1,7 @@
 @use '../utilities/type/is-color' as *;
 
 /// @name amcss__prefix
-/// @group AMCSS
+/// @group amcss
 /// @since 9.0.0
 /// @access public
 /// @type string
@@ -11,7 +11,7 @@ $amcss__prefix: 'am-' !default;
 /// соответствии с методологией [AMCSS](https://habr.com/ru/post/256109/)
 /// ---
 /// @name amcss
-/// @group AMCSS
+/// @group amcss
 /// @since 9.0.0
 /// @access public
 /// @author W3cplus
