@@ -1,12 +1,9 @@
 @use '../index.scss' as sassify;
 
 $number: 0;
-$number-2: 0.5;
 $string: 'sassify';
 $color: #fff;
 $list: a b c;
-$list-2: a, b, c;
-$list-3: (a, b, c);
 $map: (
 	a: '0',
 	b: '1'
@@ -14,13 +11,18 @@ $map: (
 $bool: true;
 $null: null;
 
-@debug sassify.is-type($number); //=> number
-@debug sassify.is-type($number-2); //=> number
-@debug sassify.is-type($string); //=> string
-@debug sassify.is-type($color); //=> color
-@debug sassify.is-type($list); //=> list
-@debug sassify.is-type($list-2); //=> list
-@debug sassify.is-type($list-3); //=> list
-@debug sassify.is-type($map); //=> map
-@debug sassify.is-type($bool); //=> bool
-@debug sassify.is-type($null); //=> null
+@debug sassify.is-bool($number); //=> false
+@debug sassify.is-bool($string); //=> false
+@debug sassify.is-bool($color); //=> false
+@debug sassify.is-bool($list); //=> false
+@debug sassify.is-bool($map); //=> false
+@debug sassify.is-bool($bool); //=> true
+
+@debug '----';
+
+@debug sassify.is-boolean($number); //=> false
+@debug sassify.is-boolean($string); //=> false
+@debug sassify.is-boolean($color); //=> false
+@debug sassify.is-boolean($list); //=> false
+@debug sassify.is-boolean($map); //=> false
+@debug sassify.is-boolean($bool); //=> true
