@@ -1,7 +1,7 @@
 @use '../type/is-list' as *;
 @use '../../helpers/invalid-type-log' as *;
 
-/// Функция `is-list-contains()` наличие значения в списке
+/// Функция `is-list-contains()` проверяет наличие значения в списке
 /// ---
 /// @name is-list-contains
 /// @group utilities
