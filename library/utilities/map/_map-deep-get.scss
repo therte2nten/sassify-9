@@ -1,0 +1,56 @@
+@use 'sass:map';
+@use '../type/is-map' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `map-deep-get()` позволяет получить какое-либо
+/// значение из карты (map)
+/// ---
+/// @name map-deep-get
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Kitty Giraudel
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$map: (
+/// 		a: 'Item A',
+/// 		b: 'Item B',
+/// 		c: 'Item C',
+/// 		d: (
+/// 			d-a: 'Item D-A',
+/// 			d-b: 'Item D-B',
+/// 			d-c: 'Item D-C',
+/// 		)
+/// 	);
+///
+/// 	@debug sassify.map-deep-get($map, a); //=> Item A
+/// 	@debug sassify.map-deep-get($map, d, d-a); //=> Item D-A
+/// @param {map} $map - карта, из которой надо
+/// 	получить значения
+/// @param {string | number} $keys... - значение(-я),
+/// 	которые надо получить из карты `$map`
+/// @return {*} значение из карты
+@function map-deep-get($map, $keys...) {
+
+	$-key: null;
+
+	// ? Если в параметр `$map` передана карта:
+	@if is-map($map) == true {
+
+		@each $k in $keys {
+			$map: map-get($map, $k);
+			$-key: $k;
+		}
+
+		@return $map;
+
+	}
+
+	// ? Если в параметр `$map` передано значение, которое
+	// ? не является картой, то отображаем сообщение об этом:
+	@else {
+		@return invalid-type-log('map-deep-get', $map, 'map');
+	}
+
+}
