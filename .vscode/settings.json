@@ -1,0 +1,28 @@
+{
+  "files.exclude": {
+    ".vscode": false,
+    "node_modules": false,
+    ".editorconfig": false,
+    ".gitignore": false,
+    ".npmrc": false,
+    "CODEOWNERS": false,
+    "LICENSE": false,
+    "package-lock.json": false,
+    "TECHNICAL-SPECIFICATION.md": false,
+    "tests.css.map": false,
+    ".github": false,
+    ".config/git": false,
+    ".config": false,
+    ".commitlint.js": false,
+    ".commitizen.js": false,
+    "CODE_OF_CONDUCT.md": false,
+    "CONTRIBUTING.md": false,
+    "README.md": false
+  },
+  "npm-scripts.showStartNotification": false,
+  "workspace.isHidden": false,
+  "workspace.disableCounter": true,
+  "workspace.disableColoring": false,
+  "workspace.alwaysShowToggle": true,
+  "workspace.statusbarPriority": 0
+}
