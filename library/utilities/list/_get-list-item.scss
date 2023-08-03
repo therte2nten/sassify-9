@@ -1,0 +1,80 @@
+@use '../type/is-list' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `get-list-item()` позволяет получить первый, последний
+/// или любой произвольный элемент из списка
+/// ---
+/// @name get-list-item
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Kitty Giraudel
+/// @link https://kittygiraudel.com/2013/08/08/advanced-sass-list-functions/ Исходник функции
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$list: Lorem ipsum dolor sit amet;
+///
+/// 	@debug sassify.get-list-item($list, 'before'); //=> Lorem
+/// 	@debug sassify.get-list-item($list, 'b'); //=> Lorem
+/// 	@debug sassify.get-list-item($list, 'after'); //=> amet
+/// 	@debug sassify.get-list-item($list, 'a'); //=> amet
+/// 	@debug sassify.get-list-item($list, 'custom', 2); //=> ipsum
+/// 	@debug sassify.get-list-item($list, 'c', 3); //=> dolor
+/// @param {list} $list - список, из которого нужно
+/// 	получить первый или последний элемент
+/// @param {string} $list-side - сторона списка, с
+/// 	которой нужно получить элемент
+/// @param {number | string} $list-item-index [null] - номер элемента,
+/// 	который нужно получить из списка `$list`
+/// @return {string | number} элемент списка
+@function get-list-item($list, $list-side, $list-item-index: null) {
+
+	$-list-side: null;
+	$-list-sides: 'before', 'b', 'after', 'a', 'custom', 'c';
+
+	// ? С помощью проверяем тип `$list`. Если это список
+	// ? то:
+	@if is-list($list) == true {
+
+		// ? Если в параметр `$list-side` передано значение
+		// ? `before` или `b`, то получаем первый элемент
+		// ? из списка `$list`:
+		@if $list-side == 'before' or $list-side == 'b' {
+			$-list-side: 1;
+		}
+
+		// ? Если в параметр `$list-side` передано значение
+		// ? `after` или `a`, то получаем последний элемент
+		// ? из списка `$list`:
+		@else if $list-side == 'after' or $list-side == 'a' {
+			$-list-side: -1;
+		}
+
+		// ? Если в параметр `$list-side` передано значение
+		// ? `custom` или `c`, то получает любой указанный
+		// ? в параметре `$list-item-index` элемент
+		// ? из списка `$list`:
+		@else if $list-side == 'custom' or $list-side == 'c' {
+			$-list-side: $list-item-index;
+		}
+
+		// ? Если в параметр `$list-side` передано значение,
+		// ? которого нет `$-list-sides`, то отображаем сообщение
+		// ? об этом:
+		@else {
+			@return alert.invalid-value-log('get-list-item', $list-side, $-list-sides);
+		}
+
+		// Получаем элемент из списка:
+		@return nth($list, $-list-side);
+
+	}
+
+	// Если `$list` не является списком, то
+	// отображаем оповещение об этом:
+	@else {
+		@return alert.invalid-type-log('get-list-item', $list, 'list');
+	}
+
+}
