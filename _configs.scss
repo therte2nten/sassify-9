@@ -1,3 +1,10 @@
+/// @ignore
+/// @name sassify
+/// @since 9.0.0
+/// @access private
+/// @type string
+$sassify: 'sassify';
+
 /// Переменная `$sassify__strict-mode` регулирует поведение
 /// функций и миксинов. отвечающих за вывод логов и сообщений
 /// об ошибках в консоль (терминал).

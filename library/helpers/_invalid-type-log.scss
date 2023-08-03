@@ -1,0 +1,41 @@
+@use '../../configs' as configs;
+@use '../utilities/type/is-type' as *;
+
+/// Функция `invalid-type-log()` выводит в консоль сообщение о том,
+/// что функции из набора Sassify передано значение, тип которого
+/// не соответствует требованию функции
+/// ---
+/// @name invalid-type-log
+/// @group helpers
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @param {string} $function-name - имя функции, параметр которой
+/// 	не соответсвует нужному типу
+/// @param {string} $problematic-value - значение, тип которого
+/// 	не соответсвует указанному типу в функции `$function-name`
+/// @param {string} $correct-type - тип, который является корректным
+/// 	для функции `$function-name`
+/// @return {string} сообщение, в котором говорится о неверном типе
+/// 	значения параметра функции `$function-name`
+@function invalid-type-log(
+	$function-name,
+	$problematic-value,
+	$correct-type) {
+
+	// С помощью функции `is-type` вычисляет текущ. тип
+	// значения параметра `$problematic-value` [string]:
+	$-current-value-type: '#{is-type($problematic-value)}';
+
+	// Формируем сообщение:
+	$-message: '(#{configs.$sassify}) Функция `#{$function-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
+
+	@if configs.$sassify__strict-mode == true {
+		@error '🟥 #{$-message}';
+	} @else {
+		@warn '🟧 #{$-message}';
+	}
+
+	@return $-message;
+
+}

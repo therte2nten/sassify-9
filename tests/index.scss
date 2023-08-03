@@ -1,22 +1,5 @@
 @use '../index.scss' as sassify with (
-	$is-time__units: 'ms' 's' 'h'
+	$sassify__strict-mode: true
 );
 
-$number: 0;
-$string: 'sassify';
-$color: #fff;
-$list: a b c;
-$map: (
-	a: '0',
-	b: '1'
-);
-$bool: true;
-$time: .5s;
-
-@debug sassify.is-time($number); //=> false
-@debug sassify.is-time($string); //=> false
-@debug sassify.is-time($color); //=> false
-@debug sassify.is-time($list); //=> false
-@debug sassify.is-time($map); //=> false
-@debug sassify.is-time($bool); //=> false
-@debug sassify.is-time($time); //=> true
+@debug sassify.invalid-type-log('check-num', 'Lorem ipsum', 'number');
