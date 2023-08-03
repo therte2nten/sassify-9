@@ -1,0 +1,37 @@
+@use 'sass:meta';
+
+/// Функция `is-color()` поможет узнать является ли значение
+/// CSS-цветом
+/// ---
+/// @name is-color
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$null: null;
+///
+/// 	@debug sassify.is-color($number); //=> false
+/// 	@debug sassify.is-color($string); //=> false
+/// 	@debug sassify.is-color($color); //=> true
+/// 	@debug sassify.is-color($list); //=> false
+/// 	@debug sassify.is-color($map); //=> false
+/// 	@debug sassify.is-color($bool); //=> false
+/// @param {color} $value - значение, которое
+/// 	надо проверить на соответствие типу `color`
+/// @return {boolean} является ли значение, переданное в параметр
+/// 	`$value`, цветом?
+@function is-color($value) {
+	@return meta.type-of($value) == color;
+}
