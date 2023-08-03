@@ -1,4 +1,6 @@
-@use '../index.scss' as sassify;
+@use '../index.scss' as sassify with (
+	$is-time__units: 'ms' 's' 'h'
+);
 
 $number: 0;
 $string: 'sassify';
@@ -9,12 +11,12 @@ $map: (
 	b: '1'
 );
 $bool: true;
-$null: null;
+$time: .5s;
 
-@debug sassify.is-string($number); //=> false
-@debug sassify.is-string($string); //=> true
-@debug sassify.is-string($color); //=> false
-@debug sassify.is-string($list); //=> false
-@debug sassify.is-string($map); //=> false
-@debug sassify.is-string($bool); //=> false
-
+@debug sassify.is-time($number); //=> false
+@debug sassify.is-time($string); //=> false
+@debug sassify.is-time($color); //=> false
+@debug sassify.is-time($list); //=> false
+@debug sassify.is-time($map); //=> false
+@debug sassify.is-time($bool); //=> false
+@debug sassify.is-time($time); //=> true

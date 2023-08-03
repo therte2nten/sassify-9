@@ -1,0 +1,48 @@
+@use 'is-number' as *;
+
+/// @name is-time__units
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @type list
+$is-time__units: 'ms' 's' !default;
+
+/// Функция `is-time()` позволяет чекнуть значение переменной
+/// и узнать является ли это обозначением времени
+/// ---
+/// @name is-time
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Kitty Giraudel
+/// @link https://github.com/KittyGiraudel Kitty Giraudel (GitHub)
+/// @link https://css-tricks.com/snippets/sass/advanced-type-checking/ Источник функции
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$time: .5s;
+///
+/// 	@debug sassify.is-time($number); //=> false
+/// 	@debug sassify.is-time($string); //=> false
+/// 	@debug sassify.is-time($color); //=> false
+/// 	@debug sassify.is-time($list); //=> false
+/// 	@debug sassify.is-time($map); //=> false
+/// 	@debug sassify.is-time($bool); //=> false
+/// 	@debug sassify.is-time($time); //=> true
+/// @param {number} $value - значение, которое
+/// 	надо проверить
+/// @return {boolean} является ли значение, переданное в параметр
+/// 	`$value`, представлением времени?
+@function is-time($value) {
+	@return is-number($value) and index($is-time__units, unit($value)) != null;
+}
