@@ -9,10 +9,9 @@
 @forward 'library/utilities/list/get-list-item-index';
 @forward 'library/utilities/list/is-list-contains';
 @forward 'library/utilities/list/list-prepend';
-
 @forward 'library/utilities/map/map-deep-get';
 @forward 'library/utilities/map/map-deep-set';
-
+@forward 'library/utilities/number/number-invert';
 @forward 'library/utilities/type/is-bool';
 @forward 'library/utilities/type/is-color';
 @forward 'library/utilities/type/is-list';

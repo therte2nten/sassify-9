@@ -1,0 +1,38 @@
+@use '../type/is-number' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `number-invert()` позволяет инвертировать
+/// положительные числа в отрицательные и наоборот.
+/// ---
+/// @name number-invert
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author [Sindre Sorhus](https://github.com/sindresorhus)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	@debug sassify.number-invert(50); //=> -50
+/// 	@debug sassify.number-invert(-50); //=> 50
+/// @param {number} $value - число, которое надо инвертировать
+/// @return {number} инвертированное число
+@function number-invert($value) {
+
+	$-result: null;
+
+	// ? Если значение параметра `$value`
+	// ? является числом:
+	@if is-number($value) == true {
+		$-result: $value * -1;
+	}
+
+	// ? Если значение параметра `$value`
+	// ? не является числом, то отображаем сообщение
+	// ? об этом:
+	@else {
+		@return invalid-type-log('number-invert', $value, 'number');
+	}
+
+	@return $-result;
+
+}
