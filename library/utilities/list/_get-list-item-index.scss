@@ -1,0 +1,51 @@
+@use '../type/is-list' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `get-list-item-index` позволяет узнать индекс
+/// элемента списка
+/// ---
+/// @name get-list-item-index
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Kitty Giraudel
+/// @link https://kittygiraudel.com/2013/08/08/advanced-sass-list-functions/ Исходник функции
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$list: Lorem ipsum dolor sit amet;
+///
+/// 	@debug sassify.get-list-item-index($list, 'sit'); //=> 4
+/// 	@debug sassify.get-list-item-index($list, 'amet'); //=> 5
+/// 	@debug sassify.get-list-item-index($list, 'Lorem'); //=> 1
+/// @param {list} $list - список, в котором нужно
+/// 	вычислить индекс элемента этого списка
+/// @param {string | number} $list-item - элемент
+/// 	списка, индекс которого нужно вычислить
+/// @return {number} индекс элемента `$list-item` из списка `$list`
+@function get-list-item-index($list, $list-item) {
+
+	$-index: null;
+
+	// ? Если `$list` является списком, то...
+	@if is-list($list) == true {
+
+		// ... проходимся циклом по списку `$list`:
+		@for $-i from 1 through length($list) {
+			@if nth($list, $-i) == $list-item {
+				$-index: $-i;
+			}
+		}
+
+		// Возвращаем индекс элемента из списка:
+		@return $-index;
+
+	}
+
+	// ? Если `$list` не является списком, то
+	// ? отображаем сообщение об этом:
+	@else {
+		@return alert.invalid-type-log('get-list-item-index', $list, 'list');
+	}
+
+}
