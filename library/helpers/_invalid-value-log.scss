@@ -37,15 +37,19 @@ $-invalid-value-log__prefix: '<#{configs.$sassify}>';
 	$-template__correct-param-values-title: '⬜ #{$-invalid-value-log__prefix} ┌ Допустимые значения миксина:';
 	$-template__correct-param-values-list-item: '🟩 #{$-invalid-value-log__prefix} └─';
 
-	// Если `$correct-params-list` [list] является списком:
+	// ? Если `$correct-params-list` [list] является списком:
 	@if is-list($correct-params-list) == true {
 
 		// Формируем сообщение:
 		$-message: '#{$-invalid-value-log__prefix} Миксин "#{$mixin-name}" не может принимать значение "#{$problematic-param-value}", т.к. этого значения нет в списке!';
 
+		// ? Если режим Strict Mode активен:
 		@if configs.$sassify__strict-mode == true {
 			@error '🟥 #{$-message} Допустимые значения миксина: "#{$correct-params-list}"';
-		} @else {
+		}
+
+		// ? Если режим Strict Mode деактивирован:
+		@else {
 
 			/* 🟧 #{$-message} */
 			/* #{$-template__correct-param-values-title} */
@@ -75,8 +79,8 @@ $-invalid-value-log__prefix: '<#{configs.$sassify}>';
 
 	}
 
-	// Если `$correct-params-list` не является списком,
-	// то отображаем сообщение об этом:
+	// ? Если `$correct-params-list` не является списком,
+	// ? то отображаем сообщение об этом:
 	@else {
 		@include invalid-type-log('invalid-value-log', $correct-params-list, 'list');
 	}

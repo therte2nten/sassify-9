@@ -36,9 +36,13 @@ $-invalid-type-log__prefix: '<#{configs.$sassify}>';
 	// Формируем сообщение:
 	$-message: '#{$-invalid-type-log__prefix} Миксин `#{$mixin-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
 
+	// ? Если режим Strict Mode активен:
 	@if configs.$sassify__strict-mode == true {
 		@error '🟥 #{$-message}';
-	} @else {
+	}
+
+	// ? Если режим Strict Mode деактивирован:
+	@else {
 
 		// Шаблоны сообщений:
 		$-template__mixin-name: '⬜ #{$-invalid-type-log__prefix} Миксин: "#{$mixin-name}"';
@@ -95,9 +99,13 @@ $-invalid-type-log__prefix: '<#{configs.$sassify}>';
 	// Формируем сообщение:
 	$-message: '#{$-invalid-type-log__prefix} Функция `#{$function-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
 
+	// ? Если режим Strict Mode активен:
 	@if configs.$sassify__strict-mode == true {
 		@error '🟥 #{$-message}';
-	} @else {
+	}
+
+	// ? Если режим Strict Mode деативирован:
+	@else {
 		@warn '🟧 #{$-message}';
 	}
 
