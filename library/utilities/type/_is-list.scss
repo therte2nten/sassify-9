@@ -1,0 +1,38 @@
+@use 'sass:meta';
+
+/// Функция `is-list()` позволяет проверить соответствие значения
+/// переменной Sass-типам `list` или `arglist`
+/// ---
+/// @name is-list
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$null: null;
+///
+/// 	@debug sassify.is-list($number); //=> false
+/// 	@debug sassify.is-list($string); //=> false
+/// 	@debug sassify.is-list($color); //=> false
+/// 	@debug sassify.is-list($list); //=> true
+/// 	@debug sassify.is-list($map); //=> false
+/// 	@debug sassify.is-list($bool); //=> false
+/// @param {list} $value - значение, которое нужно
+/// 	проверить на соответствие типу `list` или `arglist`
+/// @return {boolean} является ли значение, переданное в параметр
+/// 	`$value`, списком?
+@function is-list($value) {
+	@return meta.type-of($value) == list or
+					meta.type-of($value) == arglist;
+}
