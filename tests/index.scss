@@ -2,6 +2,6 @@
 	$sassify__strict-mode: true
 );
 
-$list: 'ipsum' 'dolor' 'sit' 'amet';
-
-@debug sassify.list-prepend($list, 'Lorem'); //=> "Lorem" "ipsum" "dolor" "sit" "amet"
+@debug sassify.number-strip-unit(16px); //=> 16
+@debug sassify.number-strip-unit(20em); //=> 20
+@debug sassify.number-strip-unit(1200px); //=> 1200

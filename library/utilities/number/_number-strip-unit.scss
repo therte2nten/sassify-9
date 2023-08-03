@@ -1,0 +1,41 @@
+@use 'sass:math';
+@use '../../../configs' as configs;
+@use '../type/is-number' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `number-strip-unit()` позволяет "отсечь" меры
+/// исчисления и получить число без всяких `px`, `em` и т.п.
+/// ---
+/// @name number-strip-unit
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author [Sindre Sorhus](https://github.com/sindresorhus)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	@debug sassify.number-strip-unit(16px); //=> 16
+/// 	@debug sassify.number-strip-unit(20em); //=> 20
+/// 	@debug sassify.number-strip-unit(1200px); //=> 1200
+/// @param {number} $value - число, с которого нужно
+/// 	отсечь обозначения меры исчисления
+/// @return {number} число без обозначений мер исчисления
+@function number-strip-unit($value) {
+
+	$-result: null;
+
+	// ? Если `$value` является числом:
+	@if is-number($value) {
+
+		$-result: math.div($value, $value * 0 + 1);
+
+		@return $-result;
+
+	}
+
+	// ? Если `$value` не является числом:
+	@else {
+		@return invalid-type-log('number-strip-unit', $value, 'number');
+	}
+
+}
