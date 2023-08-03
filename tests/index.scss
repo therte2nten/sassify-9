@@ -1,11 +1,7 @@
 @use '../index.scss' as sassify with (
-	$sassify__strict-mode: false
+	$sassify__strict-mode: true
 );
 
 $flex-wrap__correct-values: nowrap wrap wrap-reverse inherit initial unset;
 
-@include sassify.invalid-value-log(
-	'flex-wrap',
-	'abcde',
-	$flex-wrap__correct-values
-);
+@debug sassify.invalid-value-log('flex-wrap', 'abcde', $flex-wrap__correct-values);
