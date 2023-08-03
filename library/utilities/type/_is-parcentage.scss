@@ -1,0 +1,41 @@
+@use 'is-number' as *;
+
+/// Функция `is-parcentage()` позволяет узнать, является ли значение
+/// переменной процентным
+/// ---
+/// @name is-parcentage
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Kitty Giraudel
+/// @link https://css-tricks.com/snippets/sass/advanced-type-checking/ Источник функции
+/// @link https://github.com/KittyGiraudel Kitty Giraudel (GitHub)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$time: .5h;
+/// 	$parcentage: 50%;
+///
+/// 	@debug sassify.is-parcentage($number); //=> false
+/// 	@debug sassify.is-parcentage($string); //=> false
+/// 	@debug sassify.is-parcentage($color); //=> false
+/// 	@debug sassify.is-parcentage($list); //=> false
+/// 	@debug sassify.is-parcentage($map); //=> false
+/// 	@debug sassify.is-parcentage($bool); //=> false
+/// 	@debug sassify.is-parcentage($time); //=> false
+/// 	@debug sassify.is-parcentage($parcentage); //=> true
+/// @param {number} $value - значение, которое надо проверить
+/// @return {boolean} является ли значение, переданное в параметр
+/// 	`$value`, процентным?
+@function is-parcentage($value) {
+	@return is-number($value) and unit($value) == '%';
+}
