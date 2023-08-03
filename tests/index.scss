@@ -9,15 +9,12 @@ $map: (
 	b: '1'
 );
 $bool: true;
-$time: .5h;
-$parcentage: 50%;
+$null: null;
 
-@debug sassify.is-parcentage($number); //=> false
-@debug sassify.is-parcentage($string); //=> false
-@debug sassify.is-parcentage($color); //=> false
-@debug sassify.is-parcentage($list); //=> false
-@debug sassify.is-parcentage($map); //=> false
-@debug sassify.is-parcentage($bool); //=> false
-@debug sassify.is-parcentage($time); //=> false
-@debug sassify.is-parcentage($parcentage); //=> true
+@debug sassify.is-string($number); //=> false
+@debug sassify.is-string($string); //=> true
+@debug sassify.is-string($color); //=> false
+@debug sassify.is-string($list); //=> false
+@debug sassify.is-string($map); //=> false
+@debug sassify.is-string($bool); //=> false
 
