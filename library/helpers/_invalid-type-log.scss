@@ -1,6 +1,63 @@
 @use '../../configs' as configs;
 @use '../utilities/type/is-type' as *;
 
+/// Миксин `invalid-type-log()` выводит в консоль сообщение о том,
+/// что миксину из набора Sassify передано значение, тип которого
+/// не соответствует требованию миксина
+/// ---
+/// @name invalid-type-log
+/// @group helpers
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @param {string} $mixin-name - имя миксина, параметр которого
+/// 	не соответсвует нужному типу
+/// @param {string} $problematic-value - значение, тип которого
+/// 	не соответсвует указанному типу в миксине `$mixin-name`
+/// @param {string} $correct-type - тип, который является корректным
+/// 	для миксина `$mixin-name`
+@mixin invalid-type-log(
+	$mixin-name,
+	$problematic-value,
+	$correct-type) {
+
+	// С помощью функции `is-type` вычисляет текущ. тип
+	// значения параметра `$problematic-value` [string]:
+	$-current-value-type: '#{is-type($problematic-value)}';
+
+	// Формируем сообщение:
+	$-message: '(#{configs.$sassify}) Миксин `#{$mixin-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
+
+	@if configs.$sassify__strict-mode == true {
+		@error '🟥 #{$-message}';
+	} @else {
+
+		// Шаблоны сообщений:
+		$-template__mixin-name: '⬜ (#{configs.$sassify}) Миксин: "#{$mixin-name}"';
+		$-template__problematic-value: '🟧 (#{configs.$sassify}) Проблемный параметр: "#{$problematic-value}"';
+		$-template__current-value-type: '⬜ (#{configs.$sassify}) Текущ. тип значения параметра: #{$-current-value-type}';
+		$-template__correct-type: '🟩 (#{configs.$sassify}) Корректный тип значения для параметра: [#{$correct-type}]';
+
+		@warn '🟧 #{$-message}';
+
+		@debug '#{$-template__mixin-name}';
+		@debug '#{$-template__problematic-value}';
+		@debug '#{$-template__current-value-type}';
+		@debug '#{$-template__correct-type}';
+
+		/* 🟧 (#{configs.$sassify}) Ошибка типа! */
+		/* #{$-template__mixin-name} */
+		/* #{$-template__problematic-value} */
+		/* #{$-template__current-value-type} */
+		/* #{$-template__correct-type} */
+		/* -- --------- ------------ */
+		/* 🟧 (#{configs.$sassify}) Объяснение:  */
+		/* 🟧 #{$-message} */
+
+	}
+
+}
+
 /// Функция `invalid-type-log()` выводит в консоль сообщение о том,
 /// что функции из набора Sassify передано значение, тип которого
 /// не соответствует требованию функции

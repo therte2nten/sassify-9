@@ -1,5 +1,5 @@
 @use '../index.scss' as sassify with (
-	$sassify__strict-mode: true
+	$sassify__strict-mode: false
 );
 
-@debug sassify.invalid-type-log('check-num', 'Lorem ipsum', 'number');
+@include sassify.invalid-type-log('size', 'Lorem ipsum', 'number');
