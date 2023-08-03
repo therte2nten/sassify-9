@@ -1,0 +1,84 @@
+@use '../../configs' as configs;
+@use 'invalid-type-log' as *;
+@use '../utilities/type/is-list' as *;
+
+/// @ignore Переменная является приватной для функции
+/// 	и миксина `invalid-value-log()`!
+/// @name -invalid-value-log__prefix
+/// @since 9.0.0
+/// @access private
+/// @type string
+$-invalid-value-log__prefix: '<#{configs.$sassify}>';
+
+/// Миксин `invalid-value-log()` выводит в консоль сообщение о том,
+/// что миксину из набора Sassify передано значение, которое миксин
+/// не может принять
+/// ---
+/// @name invalid-value-log
+/// @group helpers
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @param {string} $mixin-name - имя миксина, которой передали
+/// 	неверное значение параметра
+/// @param {string} $problematic-param-value - значение параметра,
+/// 	которое не соответсвует значениям из списка
+/// @param {list} $correct-params-list - список корректных
+/// 	значений параметра, которые подойдут для миксина `$mixin-name`
+@mixin invalid-value-log(
+	$mixin-name,
+	$problematic-param-value,
+	$correct-params-list: ()) {
+
+	$-message: ''; // для переопределения
+
+	// Шаблоны сообщений
+	$-template__problematic-param-value: '🟥 #{$-invalid-value-log__prefix} └⤬ #{$problematic-param-value}';
+	$-template__correct-param-values-title: '⬜ #{$-invalid-value-log__prefix} ┌ Допустимые значения миксина:';
+	$-template__correct-param-values-list-item: '🟩 #{$-invalid-value-log__prefix} └─';
+
+	// Если `$correct-params-list` [list] является списком:
+	@if is-list($correct-params-list) == true {
+
+		// Формируем сообщение:
+		$-message: '#{$-invalid-value-log__prefix} Миксин "#{$mixin-name}" не может принимать значение "#{$problematic-param-value}", т.к. этого значения нет в списке!';
+
+		@if configs.$sassify__strict-mode == true {
+			@error '🟥 #{$-message} Допустимые значения миксина: "#{$correct-params-list}"';
+		} @else {
+
+			/* 🟧 #{$-message} */
+			/* #{$-template__correct-param-values-title} */
+
+			@warn '🟧 #{$-message}';
+
+			@debug '#{$-template__correct-param-values-title}';
+
+			// Проходимся по списку допустимых значений параметра
+			// и генерируем список этих значений:
+			@each $-i in $correct-params-list {
+
+				@debug '#{$-template__correct-param-values-list-item} #{$-i}';
+
+				/* #{$-template__correct-param-values-list-item} #{$-i} */
+
+			}
+
+			// Тут мы в конце списка выводим неверное значение
+			// параметра для наглядности:
+			@debug $-template__problematic-param-value;
+
+			// То же что и сверху, но в файл CSS:
+			/* #{$-template__problematic-param-value} */
+
+		}
+
+	}
+
+	// Если `$correct-params-list` не является списком,
+	// то отображаем сообщение об этом:
+	@else {
+		@include invalid-type-log('invalid-value-log', $correct-params-list, 'list');
+	}
+
+}

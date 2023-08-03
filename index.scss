@@ -3,6 +3,7 @@
 @forward 'configs';
 
 @forward 'library/helpers/invalid-type-log';
+@forward 'library/helpers/invalid-value-log';
 
 @forward 'library/utilities/type/is-bool';
 @forward 'library/utilities/type/is-color';

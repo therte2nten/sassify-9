@@ -2,4 +2,10 @@
 	$sassify__strict-mode: false
 );
 
-@include sassify.invalid-type-log('size', 'Lorem ipsum', 'number');
+$flex-wrap__correct-values: nowrap wrap wrap-reverse inherit initial unset;
+
+@include sassify.invalid-value-log(
+	'flex-wrap',
+	'abcde',
+	$flex-wrap__correct-values
+);
