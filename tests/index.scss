@@ -1,7 +1,9 @@
 @use '../index.scss' as sassify with (
-	$sassify__strict-mode: true
+	$sassify__strict-mode: false
 );
 
-$string: 'Lorem ipsum dolor sit amet.';
-
-@debug sassify.string-replace($string, 'Lorem ipsum', 'Ipsum lorem'); //=> Ipsum lorem dolor sit amet.
+@include sassify.respond-to(mzzd) {
+	.test {
+		color: red
+	}
+}

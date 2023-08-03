@@ -1,0 +1,106 @@
+@use 'sass:map';
+@use '../helpers/invalid-value-log' as *;
+
+/// Список брейкпоинтов (ширин viewport) для
+/// миксина `respond-to()`
+/// ---
+/// @name respond-to__brakepoints
+/// @group cssex
+/// @since 9.0.0
+/// @access public
+/// @prop {string} $respond-to__brakepoints.xs [(min-width: 0)]
+/// @prop {string} $respond-to__brakepoints.sm [(min-width: 576px)]
+/// @prop {string} $respond-to__brakepoints.md [(min-width: 768px)]
+/// @prop {string} $respond-to__brakepoints.lg [(min-width: 992px)]
+/// @prop {string} $respond-to__brakepoints.xl [(min-width: 1200px)]
+/// @prop {string} $respond-to__brakepoints.xxl [(min-width: 1400px)]
+/// @prop {string} $respond-to__brakepoints.max-xs [(max-width: 0)]
+/// @prop {string} $respond-to__brakepoints.max-sm [(max-width: 576px)]
+/// @prop {string} $respond-to__brakepoints.max-md [(max-width: 768px)]
+/// @prop {string} $respond-to__brakepoints.max-lg [(max-width: 992px)]
+/// @prop {string} $respond-to__brakepoints.max-xl [(max-width: 1200px)]
+/// @prop {string} $respond-to__brakepoints.max-xxl [(max-width: 1400px)]
+/// @type map
+$respond-to__brakepoints: (
+	xs: '(min-width: 0)',
+	sm: '(min-width: 576px)',
+	md: '(min-width: 768px)',
+	lg: '(min-width: 992px)',
+	xl: '(min-width: 1200px)',
+	xxl: '(min-width: 1400px)',
+	max-xs: '(max-width: 0)',
+	max-sm: '(max-width: 576px)',
+	max-md: '(max-width: 768px)',
+	max-lg: '(max-width: 992px)',
+	max-xl: '(max-width: 1200px)',
+	max-xxl: '(max-width: 1400px)'
+) !default;
+
+/// Миксин `respond-to` позволяет прописать CSS медиа-выражения
+/// проще.
+/// ---
+/// @name respond-to
+/// @group cssex
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	.class {
+///
+/// 		color: red;
+/// 		// ...
+///
+/// 		@include sassify.respond-to(md) {
+///
+/// 			color: green;
+/// 			// ...
+///
+/// 		}
+///
+/// 	}
+/// @example css Результат компиляции Sass в CSS
+/// 	.class {
+/// 	  color: red;
+/// 		/* ... */
+/// 	}
+/// 	@media (min-width: 768px) {
+/// 	  .class {
+/// 			color: green;
+/// 			/* ... */
+/// 	  }
+/// 	}
+/// @output CSS медиа-выражение с выбранным брейкпоинтом
+/// @param {string} $brakepoint - брейкпоинт (ширина
+/// 	viewport), при котором будет работать это
+/// 	медиа-выражение
+/// @content Тело медиавыражения
+@mixin respond-to($brakepoint) {
+
+	// ? Если значение параметра `$brakepoint` [string] есть в
+	// ? карте `$respond-to__brakepoints` [map]:
+	@if map-has-key($respond-to__brakepoints, $brakepoint) {
+
+		// Генерируем медиа-выражение
+		@media #{map-get($respond-to__brakepoints, $brakepoint)} {
+			@content;
+		}
+
+	}
+
+	// ? Если значение параметра `$brakepoint` [string] отсутствует
+	// ? в карте `$respond-to__brakepoints` [map]:
+	@else {
+
+		// Забираем из карты ключи для миксина вывода
+		// оповещения о том, что значение параметра`$brakepoint` [string]
+		// отсутствует в карте:
+		$-brakepoints-list: map-keys($respond-to__brakepoints);
+
+		// Выводим оповещение:
+		@include invalid-value-log('respond-to', $brakepoint, $-brakepoints-list);
+
+	}
+
+}

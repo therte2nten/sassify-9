@@ -41,7 +41,7 @@ $-invalid-value-log__prefix: '<#{configs.$sassify}>';
 	@if is-list($correct-params-list) == true {
 
 		// Формируем сообщение:
-		$-message: '#{$-invalid-value-log__prefix} Миксин "#{$mixin-name}" не может принимать значение "#{$problematic-param-value}", т.к. этого значения нет в списке!';
+		$-message: '#{$-invalid-value-log__prefix} Миксин "#{$mixin-name}()" не может принимать значение "#{$problematic-param-value}", т.к. этого значения нет в списке!';
 
 		// ? Если режим Strict Mode активен:
 		@if configs.$sassify__strict-mode == true {
@@ -116,7 +116,7 @@ $-invalid-value-log__prefix: '<#{configs.$sassify}>';
 	@if is-list($correct-params-list) == true {
 
 		// Формируем сообщение:
-		$-message: '#{$-invalid-value-log__prefix} Функция "#{$function-name}" не может принять значение "#{$problematic-param-value}", т.к. значение отсутсвует в списке корректных значений. Корректные значения: "#{$correct-params-list}"!';
+		$-message: '#{$-invalid-value-log__prefix} Функция "#{$function-name}()" не может принять значение "#{$problematic-param-value}", т.к. значение отсутсвует в списке корректных значений. Корректные значения: "#{$correct-params-list}"!';
 
 		// ? Если Strict Mode включен, то отображаем сообщение
 		// ? с помощью Sass-правила `@error`:
