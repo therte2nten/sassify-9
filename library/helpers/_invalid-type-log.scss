@@ -1,6 +1,8 @@
 @use '../../configs' as configs;
 @use '../utilities/type/is-type' as *;
 
+$-prefix: '<#{configs.$sassify}>';
+
 /// Миксин `invalid-type-log()` выводит в консоль сообщение о том,
 /// что миксину из набора Sassify передано значение, тип которого
 /// не соответствует требованию миксина
@@ -26,17 +28,17 @@
 	$-current-value-type: '#{is-type($problematic-value)}';
 
 	// Формируем сообщение:
-	$-message: '(#{configs.$sassify}) Миксин `#{$mixin-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
+	$-message: '#{$-prefix} Миксин `#{$mixin-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
 
 	@if configs.$sassify__strict-mode == true {
 		@error '🟥 #{$-message}';
 	} @else {
 
 		// Шаблоны сообщений:
-		$-template__mixin-name: '⬜ (#{configs.$sassify}) Миксин: "#{$mixin-name}"';
-		$-template__problematic-value: '🟧 (#{configs.$sassify}) Проблемный параметр: "#{$problematic-value}"';
-		$-template__current-value-type: '⬜ (#{configs.$sassify}) Текущ. тип значения параметра: #{$-current-value-type}';
-		$-template__correct-type: '🟩 (#{configs.$sassify}) Корректный тип значения для параметра: [#{$correct-type}]';
+		$-template__mixin-name: '⬜ #{$-prefix} Миксин: "#{$mixin-name}"';
+		$-template__problematic-value: '🟧 #{$-prefix} Проблемный параметр: "#{$problematic-value}"';
+		$-template__current-value-type: '⬜ #{$-prefix} Текущ. тип значения параметра: #{$-current-value-type}';
+		$-template__correct-type: '🟩 #{$-prefix} Корректный тип значения для параметра: [#{$correct-type}]';
 
 		@warn '🟧 #{$-message}';
 
@@ -45,13 +47,13 @@
 		@debug '#{$-template__current-value-type}';
 		@debug '#{$-template__correct-type}';
 
-		/* 🟧 (#{configs.$sassify}) Ошибка типа! */
+		/* 🟧 #{$-prefix} Ошибка типа! */
 		/* #{$-template__mixin-name} */
 		/* #{$-template__problematic-value} */
 		/* #{$-template__current-value-type} */
 		/* #{$-template__correct-type} */
 		/* -- --------- ------------ */
-		/* 🟧 (#{configs.$sassify}) Объяснение:  */
+		/* 🟧 #{$-prefix} Объяснение: */
 		/* 🟧 #{$-message} */
 
 	}
@@ -85,7 +87,7 @@
 	$-current-value-type: '#{is-type($problematic-value)}';
 
 	// Формируем сообщение:
-	$-message: '(#{configs.$sassify}) Функция `#{$function-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
+	$-message: '#{$-prefix} Функция `#{$function-name}()` не может принять значение `#{$problematic-value}` [#{$-current-value-type}], т.к. значение не соответствует Sass-типу `#{$correct-type}`!';
 
 	@if configs.$sassify__strict-mode == true {
 		@error '🟥 #{$-message}';
