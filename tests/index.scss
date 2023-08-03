@@ -4,9 +4,6 @@
 
 $list: Lorem ipsum dolor sit amet;
 
-@debug sassify.get-list-item($list, 'before'); //=> Lorem
-@debug sassify.get-list-item($list, 'b'); //=> Lorem
-@debug sassify.get-list-item($list, 'after'); //=> amet
-@debug sassify.get-list-item($list, 'a'); //=> amet
-@debug sassify.get-list-item($list, 'custom', 2); //=> ipsum
-@debug sassify.get-list-item($list, 'c', 3); //=> dolor
+@debug sassify.get-list-item-index($list, 'sit'); //=> 4
+@debug sassify.get-list-item-index($list, 'amet'); //=> 5
+@debug sassify.get-list-item-index($list, 'Lorem'); //=> 1
