@@ -1,0 +1,36 @@
+@use '../type/is-list' as *;
+@use '../../helpers/invalid-type-log' as *;
+
+/// Функция `list-prepend` добавляет новое значение в
+/// начало Sass-списка
+/// ---
+/// @name list-prepend
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Kitty Giraudel
+/// @link https://kittygiraudel.com/2013/08/08/advanced-sass-list-functions/ Исходник функции
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$list: 'ipsum' 'dolor' 'sit' 'amet';
+///
+/// 	@debug sassify.list-prepend($list, 'Lorem'); //=> "Lorem" "ipsum" "dolor" "sit" "amet"
+/// @param {list} $list - список, в который надо
+/// 	добавить новый элемент в начале списка
+/// @param {*} $value - элемент, который нужно
+/// 	добавить в начало списка `$list`
+/// @return {list} список с добавленным новым значением
+@function list-prepend($list, $value) {
+
+	// ? Если значение параметра является `list`:
+	@if is-list($list) == true {
+		@return join($value, $list);
+	}
+
+	// ? Если нет, то отображаем сообщение об этом:
+	@else {
+		@return invalid-type-alert('list-prepend', $list, 'list');
+	}
+
+}
