@@ -1,0 +1,37 @@
+@use 'sass:meta';
+
+/// Функция `is-number()` позволяет узнать соответствует ли значение
+/// Sass-типу `number`
+/// ---
+/// @name is-number
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$null: null;
+///
+/// 	@debug sassify.is-number($number); //=> true
+/// 	@debug sassify.is-number($string); //=> false
+/// 	@debug sassify.is-number($color); //=> false
+/// 	@debug sassify.is-number($list); //=> false
+/// 	@debug sassify.is-number($map); //=> false
+/// 	@debug sassify.is-number($bool); //=> false
+/// @param {number} $value - значение, которое
+/// 	нужно проверить на соответствие типу `number`
+/// @return {boolean} является ли значение, переданное в параметр
+/// 	`$value`, числом?
+@function is-number($value) {
+	@return meta.type-of($value) == number;
+}
