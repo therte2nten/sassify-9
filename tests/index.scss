@@ -4,5 +4,5 @@
 
 $list: a b c;
 
-@debug sassify.list-contains($list, a); //=> true
-@debug sassify.list-contains($list, d); //=> false
+@debug sassify.is-list-contains($list, a); //=> true
+@debug sassify.is-list-contains($list, d); //=> false

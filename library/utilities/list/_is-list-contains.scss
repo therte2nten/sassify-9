@@ -1,9 +1,9 @@
 @use '../type/is-list' as *;
 @use '../../helpers/invalid-type-log' as *;
 
-/// Функция `list-contains()` наличие значения в списке
+/// Функция `is-list-contains()` наличие значения в списке
 /// ---
-/// @name list-contains
+/// @name is-list-contains
 /// @group utilities
 /// @since 9.0.0
 /// @access public
@@ -13,14 +13,14 @@
 ///
 /// 	$list: a b c;
 ///
-/// 	@debug sassify.list-contains($list, a); //=> true
-/// 	@debug sassify.list-contains($list, d); //=> false
+/// 	@debug sassify.is-list-contains($list, a); //=> true
+/// 	@debug sassify.is-list-contains($list, d); //=> false
 /// @param {list} $list - список, в котором будет
 /// 	происходить поиск значения `$value`
 /// @param {*} $value - значение, которое будет искать
 /// 	функция в списке `$list`
 /// @return {boolean} есть ли значение `$value` в списке `$list`?
-@function list-contains($list, $value) {
+@function is-list-contains($list, $value) {
 
 	// ? Проверка `$list` на соответствие типу `list`:
 	@if is-list($list) == true {
@@ -30,7 +30,7 @@
 	// ? Если `$list` не является списком, то
 	// ? отображаем сообщение об этом:
 	@else {
-		@return invalid-type-log('list-contains', $list, 'list');
+		@return invalid-type-log('is-list-contains', $list, 'list');
 	}
 
 }
