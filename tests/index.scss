@@ -2,6 +2,7 @@
 	$sassify__strict-mode: true
 );
 
-$flex-wrap__correct-values: nowrap wrap wrap-reverse inherit initial unset;
+$list: a b c;
 
-@debug sassify.invalid-value-log('flex-wrap', 'abcde', $flex-wrap__correct-values);
+@debug sassify.list-contains($list, a); //=> true
+@debug sassify.list-contains($list, d); //=> false
