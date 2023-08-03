@@ -1,0 +1,78 @@
+@use 'sass:meta';
+
+/// Функция `is-bool()` позволяет проверить значение или
+/// переменную на соответствие Sass-типу `bool`
+///
+/// > У функции `is-bool()` есть также функция-алиас
+/// > `is-boolean()`, которая делает все то, что делает функция
+/// > `is-bool()`!
+/// ---
+/// @name is-bool
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$null: null;
+///
+/// 	@debug sassify.is-bool($number); //=> false
+/// 	@debug sassify.is-bool($string); //=> false
+/// 	@debug sassify.is-bool($color); //=> false
+/// 	@debug sassify.is-bool($list); //=> false
+/// 	@debug sassify.is-bool($map); //=> false
+/// 	@debug sassify.is-bool($bool); //=> true
+/// @param {*} $value - значение, которое
+/// 	надо проверить на соответствие типу `bool`
+/// @return {boolean} `true` (если значение соответствует
+/// 	типу `bool`) или `false`
+@function is-bool($value) {
+	@return meta.type-of($value) == bool;
+}
+
+/// Функция `is-boolean()` делает все то, что делает
+/// функция `is-bool()`
+/// ---
+/// @name is-boolean
+/// @alias is-bool
+/// @group utilities
+/// @since 9.0.0
+/// @access public
+/// @author Haba Kudzaev (therteenten)
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@use 'node_modules/@therteenten/sassify' as sassify;
+///
+/// 	$number: 0;
+/// 	$string: 'sassify';
+/// 	$color: #fff;
+/// 	$list: a b c;
+/// 	$map: (
+/// 		a: '0',
+/// 		b: '1'
+/// 	);
+/// 	$bool: true;
+/// 	$null: null;
+///
+/// 	@debug sassify.is-boolean($number); //=> false
+/// 	@debug sassify.is-boolean($string); //=> false
+/// 	@debug sassify.is-boolean($color); //=> false
+/// 	@debug sassify.is-boolean($list); //=> false
+/// 	@debug sassify.is-boolean($map); //=> false
+/// 	@debug sassify.is-boolean($bool); //=> true
+/// @param {*} $value - значение, которое
+/// 	надо проверить на соответствие типу `bool`
+/// @return {boolean} `true` (если значение соответствует
+/// 	типу `bool`) или `false`
+@function is-boolean($value) {
+	@return is-bool($value);
+}
