@@ -1,0 +1,72 @@
+@use '../utilities/type/is-color' as *;
+
+/// @name amcss__prefix
+/// @group AMCSS
+/// @since 9.0.0
+/// @access public
+/// @type string
+$amcss__prefix: 'am-' !default;
+
+/// Миксин `amcss()` позволяет генерировать CSS-стили в
+/// соответствии с методологией [AMCSS](https://habr.com/ru/post/256109/)
+/// ---
+/// @name amcss
+/// @group AMCSS
+/// @since 9.0.0
+/// @access public
+/// @author W3cplus
+/// @link http://sassmeister.com/gist/2709da070d6aac25a9f5 Песочница для теста
+/// @link https://github.com/W3cplus/SassMagic/blob/master/src/mixins/_amcss.scss Исходный код
+/// @link https://habr.com/ru/post/256109/ Описание методологии на Хабре
+/// @example scss Пример использования в Sass (SCSS)
+/// 	@include amcss(module) {
+/// 		color: red;
+/// 	}
+///
+/// 	@include amcss(module, blue) {
+/// 		color: blue;
+/// 	}
+///
+/// 	@include amcss(module, large) {
+/// 		font-size: 2em;
+/// 	}
+/// @example css Результат в CSS
+/// 	[am-module] {
+/// 		color: red;
+/// 	}
+///
+/// 	[am-module~="blue"] {
+/// 		color: blue;
+/// 	}
+///
+/// 	[am-module~="large"] {
+/// 		font-size: 2em;
+/// 	}
+/// @param {string} $module - название модуля
+/// @param {string | number} $trait [null] - значение модуля
+/// @param {string} prefix [$amcss__prefix] - префикс для атрибута
+@mixin amcss(
+	$module,
+	$trait: null,
+	$prefix: $amcss__prefix) {
+
+	@if $trait != null {
+
+		[#{$prefix}#{$module}~="#{$trait}"]{
+			@content;
+		}
+
+		@if is-color($trait) == true {
+			$-warn-message: '🟧 Пожалуйста, если вы в названии модуля используете название CSS-цвета (напр.: blue, green, red), то указывайте название в кавычках, чтобы компилятор Sass не выдавал предупреждений.';
+			@warn $-warn-message;
+		}
+
+	}
+
+	@else {
+		[#{$prefix}#{$module}]{
+			@content;
+		}
+	}
+
+}

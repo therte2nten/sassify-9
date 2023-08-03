@@ -2,8 +2,14 @@
 	$sassify__strict-mode: false
 );
 
-@include sassify.respond-to(mzzd) {
-	.test {
-		color: red
-	}
+@include sassify.amcss(module) {
+	color: red;
+}
+
+@include sassify.amcss(module, 'blue') {
+	color: blue;
+}
+
+@include sassify.amcss(module, large) {
+	font-size: 2em;
 }
