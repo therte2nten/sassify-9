@@ -2,8 +2,6 @@
 	$sassify__strict-mode: true
 );
 
-$list: Lorem ipsum dolor sit amet;
+$list: 'ipsum' 'dolor' 'sit' 'amet';
 
-@debug sassify.get-list-item-index($list, 'sit'); //=> 4
-@debug sassify.get-list-item-index($list, 'amet'); //=> 5
-@debug sassify.get-list-item-index($list, 'Lorem'); //=> 1
+@debug sassify.list-prepend($list, 'Lorem'); //=> "Lorem" "ipsum" "dolor" "sit" "amet"

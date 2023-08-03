@@ -63,7 +63,7 @@
 		// ? которого нет `$-list-sides`, то отображаем сообщение
 		// ? об этом:
 		@else {
-			@return alert.invalid-value-log('get-list-item', $list-side, $-list-sides);
+			@return invalid-value-log('get-list-item', $list-side, $-list-sides);
 		}
 
 		// Получаем элемент из списка:
@@ -74,7 +74,7 @@
 	// Если `$list` не является списком, то
 	// отображаем оповещение об этом:
 	@else {
-		@return alert.invalid-type-log('get-list-item', $list, 'list');
+		@return invalid-type-log('get-list-item', $list, 'list');
 	}
 
 }

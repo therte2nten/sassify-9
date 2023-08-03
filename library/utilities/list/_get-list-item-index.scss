@@ -45,7 +45,7 @@
 	// ? Если `$list` не является списком, то
 	// ? отображаем сообщение об этом:
 	@else {
-		@return alert.invalid-type-log('get-list-item-index', $list, 'list');
+		@return invalid-type-log('get-list-item-index', $list, 'list');
 	}
 
 }
